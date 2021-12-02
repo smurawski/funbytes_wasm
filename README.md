@@ -29,11 +29,13 @@ popd
 
 ## What is WAGI?
 
-
+WebAssembly Gateway Interface or WAGI allows you to run WebAssembly WASI binaries as HTTP handlers. WAGI is the foundation for Hippo and Krustlet, which we'll take a deeper look at.
 
 ## What is [Hippo](https://github.com/deislabs/hippo)?
 
-## Getting Started with Hippo in Azure
+Hippo is a Platform-as-a-Service (PaaS) designed to provide a hosting environment that makes following cloud-native best practices easier. Hippo uses WAGI to provide a sandboxed, secure, and highly performant runtime environment with a great developer experience.
+
+## Getting Started with [Hippo in Azure](https://github.com/smurawski/hippo-dev)
 
 ### Create a Dev/Test Environment
 
@@ -49,6 +51,7 @@ popd
 ### Create Our App
 
 ```
+mkdir src/funbytes
 pushd src/funbytes_live
 
 $env:USER = 'admin'
@@ -78,6 +81,10 @@ popd
 ```
 
 ## What is [Krustlet](https://github.com/krustlet/krustlet)?
+
+Krustlet acts as a Kubelet by listening on the event stream for new pods that the scheduler assigns to it based on specific Kubernetes tolerations.
+
+The default implementation of Krustlet listens for the architecture wasm32-wasi and schedules those workloads to run in a wasmtime-based runtime instead of a container runtime.
 
 ## Getting Started with Krustlet in AKS (WASM NodePools)
 
@@ -114,3 +121,19 @@ helm install hello-wasi bitnami/nginx -f values.yml
 kubectl get svc hello-wasi-nginx -o="jsonpath={'http://'}{.status.loadBalancer.ingress[0].ip}{'\n'}"
 popd
 ```
+
+## Reference Links
+
+#### [My Blog Series](https://dev.to/smurawski/series/15635)
+
+#### [Dev Environment Repo](https://github.com/smurawski/hippo-dev)
+
+#### [Wasmtime](https://wasmtime.dev/)
+
+#### [WAGI](https://github.com/deislabs/wagi)
+
+#### [Hippo](https://github.com/deislabs/hippo)
+
+#### [Krustlet](https://github.com/krustlet/krustlet)
+
+#### [WASM Node Pools in AKS](https://docs.microsoft.com/azure/aks/use-wasi-node-pools?containers-50124-stmuraws)
